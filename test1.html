@@ -1,36 +1,50 @@
-<!--  ----------------------------------------------------------------------  -->
-<!--  NOTE: Please add the following <META> element to your page <HEAD>.      -->
-<!--  If necessary, please modify the charset parameter to specify the        -->
-<!--  character set of your HTML page.                                        -->
-<!--  ----------------------------------------------------------------------  -->
-
-<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+<!DOCTYPE html>
 <html>
 <head>
+    <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
     <style type="text/css">
         body {
-            background: #f0f0f0;
+            background: #eee;
             max-width: 40rem;
-            margin:auto;
+            margin: auto;
             font-family: sans-serif;
             line-height: 150%;
             padding-top: 2rem;
         }
+
         section {
             padding: 1rem;
-            border: 1px solid #666;
+            border: 1px solid #888;
+            border-radius: 1rem;
+            margin: 1rem;
+            background: #fff;
         }
 
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 2fr;
+            gap: 1rem;
         }
+        .form-grid header {
+            grid-column: 1 / span 2;
+        }
+
         .form-grid label {
-            text-align: right;
-            padding-right: 1rem;
+            justify-self: end;
         }
-        .form-grid br {
-            display: none;
+
+        .form-grid input[type="checkbox"] {
+            justify-self: start;
+        }
+        .form-grid aside {
+            color: white;
+            background: red;
+            grid-column:  1/ span 2;
+            padding: 1rem;
+            border-radius: 1rem;
+        }
+        input.invalid {
+            border: 1px solid red;
         }
     </style>
 </head>
@@ -55,93 +69,151 @@
     <!--  ----------------------------------------------------------------------  -->
 
     <section class="form-grid">
-    <label for="first_name">First Name</label><input  id="first_name" maxlength="40" name="first_name" size="20" type="text" /><br>
+        <header>Primary Contact Information</header>
+        <label for="first_name">First Name</label>
+        <input id="first_name" maxlength="40" name="first_name" size="20" type="text" required/>
 
-    <label for="last_name">Last Name</label><input  id="last_name" maxlength="80" name="last_name" size="20" type="text" /><br>
+        <label for="last_name">Last Name</label><input id="last_name" maxlength="80" name="last_name" size="20"
+                                                       type="text"/>
 
-    <label for="email">Email</label><input  id="email" maxlength="80" name="email" size="20" type="text" /><br>
+        <label for="email">Email</label><input id="email" maxlength="80" name="email" size="20" type="text"/>
 
-    <label for="phone">Phone</label><input  id="phone" maxlength="40" name="phone" size="20" type="text" /><br>
+        <label for="phone">Phone</label><input id="phone" maxlength="40" name="phone" size="20" type="text"/>
 
-    <label for="company">Company</label><input  id="company" maxlength="40" name="company" size="20" type="text" /><br>
+        <label for="company">Company</label><input id="company" maxlength="40" name="company" size="20"
+                                                   type="text"/>
 
-    <label for="street">Street</label><textarea id="street" name="street"></textarea><br>
+        <header>Street Address</header>
+        <label for="street">Street</label><textarea id="street" name="street"></textarea>
 
-    <label for="city">City</label><input  id="city" maxlength="40" name="city" size="20" type="text" /><br>
+        <label for="city">City/Town</label><input id="city" maxlength="40" name="city" size="20" type="text"/>
 
-    <label for="state">State/Province</label><input  id="state" maxlength="20" name="state" size="20" type="text" /><br>
+        <label for="state">State/Province</label><input id="state" maxlength="20" name="state" size="20"
+                                                        type="text"/>
 
-    <label for="zip">Zip</label><input  id="zip" maxlength="20" name="zip" size="20" type="text" /><br>
+        <label for="zip">Zip/Postal Code</label><input id="zip" maxlength="20" name="zip" size="20" type="text"/>
 
-    <label for="country">Country</label><input  id="country" maxlength="40" name="country" size="20" type="text" /><br>
+        <label for="country">Country</label><input id="country" maxlength="40" name="country" size="20"
+                                                   type="text"/>
 
     </section>
 
     <section class="form-grid">
+        <header>Type of Reservation</header>
         <label for="00N8J000000NrmT"> Group Type:</label>
-        <select  id="00N8J000000NrmT" name="00N8J000000NrmT" title="Group Type">
+        <select id="00N8J000000NrmT" name="00N8J000000NrmT" title="Group Type">
             <option value="">--None--</option>
-            <option value="Individual">Individual</option>
-            <option value="Group">Group</option>
+            <option value="Individual">Individual (Single, Couple, or Family)</option>
+            <option value="Group">Group (Churches, Youth Groups, Schools, Homeschool Co-Ops, etc.)</option>
         </select>
 
-        <label for="00N8J000000Njlh">Group Size:</label>
-        <input  id="00N8J000000Njlh" name="00N8J000000Njlh" size="20" type="text" />
+        <label for="00N8J000000Njlh">How many in your party?</label>
+        <input id="00N8J000000Njlh" name="00N8J000000Njlh" size="20" type="text"/>
 
-        <label for="00N8J000000Nrmd">Visit Type:</label>
-        <select  id="00N8J000000Nrmd" name="00N8J000000Nrmd" title="Visit Type">
+        <label for="00N8J000000Nrmd">Length of Visit</label>
+        <select id="00N8J000000Nrmd" name="00N8J000000Nrmd" title="Visit Type">
             <option value="">--None--</option>
-            <option value="Day Visit">Day Visit</option>
-            <option value="Week">Week</option>
-            <option value="Longer Term">Longer Term</option>
+            <option value="Day Visit">Day Visit (Monday through Friday only)</option>
+            <option value="Week">Week (Sunday arrival, Friday departure)</option>
+            <option value="Longer Term">Longer Term (More than a week, 3 months maximum)</option>
         </select>
     </section>
 
     <section class="form-grid">
+        <header>Visit for a Day</header>
         <label for="00N8J000000Njlr">Arrival Preference 1:</label>
-        <span class="dateInput dateOnlyInput"><input  id="00N8J000000Njlr" name="00N8J000000Njlr" size="12" type="text" /></span>
+        <span class="dateInput dateOnlyInput"><input id="00N8J000000Njlr" name="00N8J000000Njlr" size="12" type="text"/></span>
 
 
         <label for="00N8J000000Njlw">Arrival Preference 2:</label>
-        <span class="dateInput dateOnlyInput"><input  id="00N8J000000Njlw" name="00N8J000000Njlw" size="12" type="text" /></span><br>
+        <span class="dateInput dateOnlyInput"><input id="00N8J000000Njlw" name="00N8J000000Njlw" size="12" type="text"/></span>
 
         <label for="00N8J000000Nrms">Arrival Time:</label>
         <span class="timeContainer">
-            <input  id="00N8J000000Nrms" name="00N8J000000Nrms" placeholder="HH:MM" size="12" type="text" />
+            <input id="00N8J000000Nrms" name="00N8J000000Nrms" placeholder="HH:MM" size="12" type="text"/>
         </span>
-
         <label for="00N8J000000Njlm">Length of Stay (Weeks):</label>
-        <input  id="00N8J000000Njlm" name="00N8J000000Njlm" size="20" type="text" />
+
+        <input id="00N8J000000Njlm" name="00N8J000000Njlm" size="20" type="text"/>
+        <aside>multi-selection with select is a pain. Replace with a better control or checkboxes.</aside>
+        <header>Will you be joining us for meals?</header>
+
+        <label for="00N8J000000Nrmx">Meals:</label>
+        <select id="00N8J000000Nrmx" multiple="multiple" name="00N8J000000Nrmx" title="Meals">
+            <option value="Breakfast">Breakfast (7:00 AM)</option>
+            <option value="Lunch">Lunch (12:00 PM)</option>
+            <option value="Dinner">Dinner (5:30 PM)</option>
+        </select>
+
     </section>
 
     <section class="form-grid">
-        Meals:<select  id="00N8J000000Nrmx" multiple="multiple" name="00N8J000000Nrmx" title="Meals"><option value="Breakfast">Breakfast</option>
-        <option value="Lunch">Lunch</option>
-        <option value="Dinner">Dinner</option>
-    </select>
+    <header>Week Stay (Sunday late afternoon arrival, Friday departure)</header>
+        <aside>switch to checkboxes</aside>
+    <label for="00N8J000000Nrme">Accommodations:</label>
+        <select id="00N8J000000Nrme" multiple="multiple" name="00N8J000000Nrme" title="Accommodations">
+            <option value="Housing needed">Housing needed</option>
+            <option value="Ground floor">Ground floor</option>
+            <option value="Accessible">Accessible</option>
+            <option value="RV site">RV site</option>
+            <option value="50 amp service">50 amp service</option>
+        </select>
 
-    Accommodations:<select  id="00N8J000000Nrme" multiple="multiple" name="00N8J000000Nrme" title="Accommodations"><option value="Housing needed">Housing needed</option>
-    <option value="Ground floor">Ground floor</option>
-    <option value="Accessible">Accessible</option>
-    <option value="RV site">RV site</option>
-    <option value="50 amp service">50 amp service</option>
-</select><br>
-
-    Number of RV Sites:<input  id="00N8J000000Nrn2" name="00N8J000000Nrn2" size="20" type="text" /><br>
+        <label for="00N8J000000Nrn2">Number of RV Sites:</label>
+        <input id="00N8J000000Nrn2" name="00N8J000000Nrn2" size="20" type="text"/>
     </section>
 
-    <section>
+    <section class="form-grid">
+        <header>Long Term Stays</header>
 
-    New Volunteer:<input  id="00N8J000000Nrn7" name="00N8J000000Nrn7" type="checkbox" value="1" /><br>
+        <label for="00N8J000000Nrn7">Are you new to Gleanings for the Hungry?</label>
+        <input id="00N8J000000Nrn7" name="00N8J000000Nrn7" type="checkbox" value="1"/>
 
-    MB Application Complete:<input  id="00N8J000000NrnC" name="00N8J000000NrnC" type="checkbox" value="1" /><br>
+        <label for="00N8J000000NrnC">Have you completed the Mission Builder's application? (long term volunteers require additional screening)</label>
+        <input id="00N8J000000NrnC" name="00N8J000000NrnC" type="checkbox" value="1"/>
+    </section>
 
-    Volunteer Comments:<textarea  id="00N8J000000Njm6" name="00N8J000000Njm6" rows="3" type="text" wrap="soft"></textarea><br>
+    <section class="form-grid">
+        <header>Comments</header>
+        <label for="00N8J000000Njm6">Notes: Anything else we need to know? (food allergies, special diet, youth age ranges, etc)</label>
+        <textarea id="00N8J000000Njm6" name="00N8J000000Njm6" rows="3" type="text"
+                                     wrap="soft"></textarea>
 
     </section>
-    <input type="submit" name="submit">
+    <input type="button" value="validate" id="validate"/>
+    <input type="submit" name="submit" id="submit" disabled>
 
 </form>
+
+<script>
+    const $ = (sel) => document.querySelector(sel)
+    const $$ = (sel) => document.querySelectorAll(sel)
+    const on = (el, type, cb) => el.addEventListener(type,cb)
+
+    function is_invalid(input) {
+        console.log('checking',input.value)
+        if(input.value === null) return true
+        return false
+    }
+    function do_setup() {
+        console.log("doing the setup")
+        on($("#validate"),'click',() => {
+            console.log("clicked")
+            let valid = true
+            $$("input").forEach(inp => {
+                if(inp.required && is_invalid(inp)) {
+                    inp.classList.add('invalid')
+                    console.log('not valid')
+                    valid = false
+                }
+            })
+            if(valid) {
+                $("#submit").disabled = false
+            }
+        })
+    }
+    window.addEventListener("load", do_setup)
+</script>
 
 </body>
 </html>
