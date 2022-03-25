@@ -26,6 +26,9 @@
             grid-template-columns: 1fr 2fr;
             gap: 1rem;
         }
+        fieldset {
+            border-width: 0;
+        }
         .form-grid > fieldset {
             grid-column: 1 / span 2;
         }
@@ -181,21 +184,23 @@
         <input class="long-type" id="00N8J000000Njlm" name="00N8J000000Njlm" size="20" type="text"/>
 
 
-        <aside class="week-type long-type">switch to checkboxes</aside>
-        <label class="week-type long-type" for="00N8J000000Nrme">What accommodations do you require?</label>
-        <select class="week-type long-type" id="00N8J000000Nrme" multiple="multiple" name="00N8J000000Nrme" title="Accommodations">
-            <option value="Housing needed">Housing needed</option>
-            <option value="Ground floor">Ground floor</option>
-            <option value="Accessible">Accessible</option>
-            <option value="RV site">RV site</option>
-            <option value="50 amp service">50 amp service</option>
-        </select>
+        <fieldset class="form-grid week-type long-type" title="Accommodations">
+            <h3 for="00N8J000000Nrme">What accommodations do you require?</h3>
+            <label>Housing needed</label>
+            <input type="checkbox" name="00N8J000000Nrme" value="Housing needed">
+            <label>Ground floor</label>
+            <input type="checkbox" name="00N8J000000Nrme" value="Ground floor">
+            <label>Accessible</label>
+            <input type="checkbox" name="00N8J000000Nrme" value="Accessible">
+            <label>RV site</label>
+            <input type="checkbox" name="00N8J000000Nrme" value="RV site">
+            <label>50 amp service</label>
+            <input type="checkbox" name="00N8J000000Nrme" value="50 amp service">
+        </fieldset>
 
         <aside class="week-type long-type">should both week and long visits ask about number of RV sites?</aside>
         <label class="week-type long-type" for="00N8J000000Nrn2">Number of RV Sites:</label>
         <input class="week-type long-type" id="00N8J000000Nrn2" name="00N8J000000Nrn2" size="20" type="text"/>
-
-
 
     </section>
 
