@@ -26,6 +26,9 @@
             grid-template-columns: 1fr 2fr;
             gap: 1rem;
         }
+        .form-grid > fieldset {
+            grid-column: 1 / span 2;
+        }
         .form-grid header, .form-grid h2 {
             grid-column: 1 / span 2;
             color: green;
@@ -139,21 +142,27 @@
         <h2 class='week-type'>Week Stay (Sunday late afternoon arrival, Friday departure)</h2>
         <h2 class="long-type ">Long Term Stays</h2>
 
-        <label class="day-type" for="00N8J000000Nrms">Arrival Time:</label>
-        <span class="day-type timeContainer">
-            <input id="00N8J000000Nrms" name="00N8J000000Nrms" placeholder="HH:MM" size="12" type="text"/>
-        </span>
-        <aside class="day-type">missing form input for departure time</aside>
+        <fieldset class="day-type form-grid">
+            <label class="day-type" for="00N8J000000Nrms">Arrival Time:</label>
+            <span class="day-type timeContainer">
+                <input id="00N8J000000Nrms" name="00N8J000000Nrms" placeholder="HH:MM" size="12" type="text"/>
+            </span>
+            <label class="day-type">Departure Time:</label>
+            <span class="day-type timeContainer">
+                <input placeholder="HH:MM" size="12" type="text"/>
+            </span>
+            <aside class="day-type">missing form input for departure time</aside>
+        </fieldset>
 
-        <aside class="day-type">multi-selection with select is a pain. Replace with a better control or checkboxes.</aside>
-        <h3 class="day-type">Will you be joining us for meals?</h3>
-
-        <label class="day-type" for="00N8J000000Nrmx">Meals:</label>
-        <select class="day-type" id="00N8J000000Nrmx" multiple="multiple" name="00N8J000000Nrmx" title="Meals">
-            <option value="Breakfast">Breakfast (7:00 AM)</option>
-            <option value="Lunch">Lunch (12:00 PM)</option>
-            <option value="Dinner">Dinner (5:30 PM)</option>
-        </select>
+        <fieldset class="day-type form-grid">
+            <h3>Will you be joining us for meals? <i>Suggested donation is $5/meal)</i></h3>
+            <label>Breakfast (7:00 AM)</label>
+            <input type="checkbox"  name="00N8J000000Nrmx" value="Breakfast"/>
+            <label>Lunch (12:00 PM)</label>
+            <input type="checkbox"  name="00N8J000000Nrmx" value="Lunch">
+            <label>Dinner (5:30 PM)</label>
+            <input type="checkbox"  name="00N8J000000Nrmx"  value="Dinner">
+        </fieldset>
 
 
         <label class="long-type" for="00N8J000000Nrn7">Are you new to Gleanings for the Hungry?</label>
