@@ -10,6 +10,7 @@
             font-family: sans-serif;
             line-height: 150%;
             padding-top: 2rem;
+            font-size: 1rem;
         }
 
         section {
@@ -25,12 +26,25 @@
             grid-template-columns: 1fr 2fr;
             gap: 1rem;
         }
-        .form-grid header {
+        .form-grid header, .form-grid h2 {
             grid-column: 1 / span 2;
+            color: green;
+            font-size: 1.2rem;
+            font-weight: normal;
+        }
+        .form-grid h3 {
+            grid-column: 1 / span 2;
+            color: #888;
+            font-size: 1.0rem;
+            font-weight: normal;
         }
 
         .form-grid label {
+            color: #444;
             justify-self: end;
+        }
+        .form-grid input {
+            color: #444;
         }
 
         .form-grid input[type="checkbox"] {
@@ -46,13 +60,12 @@
         input.invalid {
             border: 1px solid red;
         }
+        .hide {
+            display: none;
+        }
     </style>
 </head>
 <body>
-
-<!--  ----------------------------------------------------------------------  -->
-<!--  NOTE: Please add the following <FORM> element to your page.             -->
-<!--  ----------------------------------------------------------------------  -->
 
 <h1>Gleanings Booking</h1>
 <form action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
@@ -69,21 +82,23 @@
     <!--  ----------------------------------------------------------------------  -->
 
     <section class="form-grid">
-        <header>Primary Contact Information</header>
+        <h2>Primary Contact Information</h2>
         <label for="first_name">First Name</label>
         <input id="first_name" maxlength="40" name="first_name" size="20" type="text" required/>
 
-        <label for="last_name">Last Name</label><input id="last_name" maxlength="80" name="last_name" size="20"
-                                                       type="text"/>
+        <label for="last_name">Last Name</label>
+        <input id="last_name" maxlength="80" name="last_name" size="20" type="text"/>
 
-        <label for="email">Email</label><input id="email" maxlength="80" name="email" size="20" type="text"/>
+        <label for="email">Email</label>
+        <input id="email" maxlength="80" name="email" size="20" type="text"/>
 
-        <label for="phone">Phone</label><input id="phone" maxlength="40" name="phone" size="20" type="text"/>
+        <label for="phone">Phone</label>
+        <input id="phone" maxlength="40" name="phone" size="20" type="text"/>
 
-        <label for="company">Company</label><input id="company" maxlength="40" name="company" size="20"
-                                                   type="text"/>
+        <label for="company">Company</label>
+        <input id="company" maxlength="40" name="company" size="20" type="text"/>
 
-        <header>Street Address</header>
+        <h3>Street Address</h3>
         <label for="street">Street</label><textarea id="street" name="street"></textarea>
 
         <label for="city">City/Town</label><input id="city" maxlength="40" name="city" size="20" type="text"/>
@@ -93,13 +108,13 @@
 
         <label for="zip">Zip/Postal Code</label><input id="zip" maxlength="20" name="zip" size="20" type="text"/>
 
-        <label for="country">Country</label><input id="country" maxlength="40" name="country" size="20"
-                                                   type="text"/>
+        <label for="country">Country</label>
+        <input id="country" maxlength="40" name="country" size="20" type="text"/>
 
     </section>
 
     <section class="form-grid">
-        <header>Type of Reservation</header>
+        <h2>Type of Reservation</h2>
         <label for="00N8J000000NrmT"> Group Type:</label>
         <select id="00N8J000000NrmT" name="00N8J000000NrmT" title="Group Type">
             <option value="">--None--</option>
@@ -111,8 +126,8 @@
         <input id="00N8J000000Njlh" name="00N8J000000Njlh" size="20" type="text"/>
 
         <label for="00N8J000000Nrmd">Length of Visit</label>
-        <select id="00N8J000000Nrmd" name="00N8J000000Nrmd" title="Visit Type">
-            <option value="">--None--</option>
+        <select id="00N8J000000Nrmd" name="00N8J000000Nrmd" title="Visit Type" data-name="visit-type">
+            <option value="invalid">--None--</option>
             <option value="Day Visit">Day Visit (Monday through Friday only)</option>
             <option value="Week">Week (Sunday arrival, Friday departure)</option>
             <option value="Longer Term">Longer Term (More than a week, 3 months maximum)</option>
@@ -120,38 +135,46 @@
     </section>
 
     <section class="form-grid">
-        <header>Visit for a Day</header>
-        <label for="00N8J000000Njlr">Arrival Preference 1:</label>
-        <span class="dateInput dateOnlyInput"><input id="00N8J000000Njlr" name="00N8J000000Njlr" size="12" type="text"/></span>
+        <h2 class="day-type">Visit for a Day</h2>
+        <h2 class='week-type'>Week Stay (Sunday late afternoon arrival, Friday departure)</h2>
+        <h2 class="long-type ">Long Term Stays</h2>
 
-
-        <label for="00N8J000000Njlw">Arrival Preference 2:</label>
-        <span class="dateInput dateOnlyInput"><input id="00N8J000000Njlw" name="00N8J000000Njlw" size="12" type="text"/></span>
-
-        <label for="00N8J000000Nrms">Arrival Time:</label>
-        <span class="timeContainer">
+        <label class="day-type" for="00N8J000000Nrms">Arrival Time:</label>
+        <span class="day-type timeContainer">
             <input id="00N8J000000Nrms" name="00N8J000000Nrms" placeholder="HH:MM" size="12" type="text"/>
         </span>
-        <label for="00N8J000000Njlm">Length of Stay (Weeks):</label>
+        <aside class="day-type">missing form input for departure time</aside>
 
-        <input id="00N8J000000Njlm" name="00N8J000000Njlm" size="20" type="text"/>
-        <aside>multi-selection with select is a pain. Replace with a better control or checkboxes.</aside>
-        <header>Will you be joining us for meals?</header>
+        <aside class="day-type">multi-selection with select is a pain. Replace with a better control or checkboxes.</aside>
+        <h3 class="day-type">Will you be joining us for meals?</h3>
 
-        <label for="00N8J000000Nrmx">Meals:</label>
-        <select id="00N8J000000Nrmx" multiple="multiple" name="00N8J000000Nrmx" title="Meals">
+        <label class="day-type" for="00N8J000000Nrmx">Meals:</label>
+        <select class="day-type" id="00N8J000000Nrmx" multiple="multiple" name="00N8J000000Nrmx" title="Meals">
             <option value="Breakfast">Breakfast (7:00 AM)</option>
             <option value="Lunch">Lunch (12:00 PM)</option>
             <option value="Dinner">Dinner (5:30 PM)</option>
         </select>
 
-    </section>
 
-    <section class="form-grid">
-    <header>Week Stay (Sunday late afternoon arrival, Friday departure)</header>
-        <aside>switch to checkboxes</aside>
-    <label for="00N8J000000Nrme">Accommodations:</label>
-        <select id="00N8J000000Nrme" multiple="multiple" name="00N8J000000Nrme" title="Accommodations">
+        <label class="long-type" for="00N8J000000Nrn7">Are you new to Gleanings for the Hungry?</label>
+        <input class="long-type" id="00N8J000000Nrn7" name="00N8J000000Nrn7" type="checkbox" value="1"/>
+        <label class="long-type" for="00N8J000000NrnC">Have you completed the Mission Builder's application? (long term volunteers require additional screening)</label>
+        <input class="long-type" id="00N8J000000NrnC" name="00N8J000000NrnC" type="checkbox" value="1"/>
+
+
+        <h3 class="week-type long-type">select your preferred arrival dates</h3>
+        <label class="week-type long-type" for="00N8J000000Njlr">Arrival Preference 1:</label>
+        <span class="dateInput dateOnlyInput week-type long-type"><input id="00N8J000000Njlr" name="00N8J000000Njlr" size="12" type="text"/></span>
+        <label for="00N8J000000Njlw" class="week-type long-type">Arrival Preference 2:</label>
+        <span class="week-type long-type dateInput dateOnlyInput"><input id="00N8J000000Njlw" name="00N8J000000Njlw" size="12" type="text"/></span>
+
+        <label class="long-type" for="00N8J000000Njlm">Length of Stay (Weeks):</label>
+        <input class="long-type" id="00N8J000000Njlm" name="00N8J000000Njlm" size="20" type="text"/>
+
+
+        <aside class="week-type long-type">switch to checkboxes</aside>
+        <label class="week-type long-type" for="00N8J000000Nrme">What accommodations do you require?</label>
+        <select class="week-type long-type" id="00N8J000000Nrme" multiple="multiple" name="00N8J000000Nrme" title="Accommodations">
             <option value="Housing needed">Housing needed</option>
             <option value="Ground floor">Ground floor</option>
             <option value="Accessible">Accessible</option>
@@ -159,22 +182,16 @@
             <option value="50 amp service">50 amp service</option>
         </select>
 
-        <label for="00N8J000000Nrn2">Number of RV Sites:</label>
-        <input id="00N8J000000Nrn2" name="00N8J000000Nrn2" size="20" type="text"/>
+        <aside class="week-type long-type">should both week and long visits ask about number of RV sites?</aside>
+        <label class="week-type long-type" for="00N8J000000Nrn2">Number of RV Sites:</label>
+        <input class="week-type long-type" id="00N8J000000Nrn2" name="00N8J000000Nrn2" size="20" type="text"/>
+
+
+
     </section>
 
     <section class="form-grid">
-        <header>Long Term Stays</header>
-
-        <label for="00N8J000000Nrn7">Are you new to Gleanings for the Hungry?</label>
-        <input id="00N8J000000Nrn7" name="00N8J000000Nrn7" type="checkbox" value="1"/>
-
-        <label for="00N8J000000NrnC">Have you completed the Mission Builder's application? (long term volunteers require additional screening)</label>
-        <input id="00N8J000000NrnC" name="00N8J000000NrnC" type="checkbox" value="1"/>
-    </section>
-
-    <section class="form-grid">
-        <header>Comments</header>
+        <h2>Comments</h2>
         <label for="00N8J000000Njm6">Notes: Anything else we need to know? (food allergies, special diet, youth age ranges, etc)</label>
         <textarea id="00N8J000000Njm6" name="00N8J000000Njm6" rows="3" type="text"
                                      wrap="soft"></textarea>
@@ -214,6 +231,45 @@
                 $("#submit").disabled = false
             }
         })
+
+        let visit_type = 'invalid'
+        const DAY_VISIT = 'Day Visit'
+        const WEEK_VISIT = 'Week'
+        const LONG_VISIT = 'Longer Term'
+        //hide the day
+        function hide(name) {
+            $$(`.${name}-type`).forEach(el => el.classList.add('hide'))
+        }
+        function show(name) {
+            $$(`.${name}-type`).forEach(el => el.classList.remove('hide'))
+        }
+        function update_visible() {
+            if(visit_type === 'invalid') {
+                hide('day')
+                hide('week')
+                hide('long')
+            }
+            if(visit_type === DAY_VISIT) {
+                hide('week')
+                hide('long')
+                show('day')
+            }
+            if(visit_type === WEEK_VISIT) {
+                hide('day')
+                hide('long')
+                show('week')
+            }
+            if(visit_type === LONG_VISIT) {
+                hide('day')
+                hide('week')
+                show('long')
+            }
+        }
+        on($(`select[data-name='visit-type']`),'change',(e)=>{
+            visit_type = e.target.value
+            update_visible()
+        })
+        update_visible()
     }
     window.addEventListener("load", do_setup)
 </script>
