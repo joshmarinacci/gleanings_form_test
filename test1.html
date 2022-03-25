@@ -5,15 +5,46 @@
 <!--  ----------------------------------------------------------------------  -->
 
 <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+<html>
+<head>
+    <style type="text/css">
+        body {
+            background: #f0f0f0;
+            max-width: 40rem;
+            margin:auto;
+            font-family: sans-serif;
+            line-height: 150%;
+            padding-top: 2rem;
+        }
+        section {
+            padding: 1rem;
+            border: 1px solid #666;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+        }
+        .form-grid label {
+            text-align: right;
+            padding-right: 1rem;
+        }
+        .form-grid br {
+            display: none;
+        }
+    </style>
+</head>
+<body>
 
 <!--  ----------------------------------------------------------------------  -->
 <!--  NOTE: Please add the following <FORM> element to your page.             -->
 <!--  ----------------------------------------------------------------------  -->
 
+<h1>Gleanings Booking</h1>
 <form action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
 
     <input type=hidden name="oid" value="00D8J0000008fh0">
-    <input type=hidden name="retURL" value="http://gleanings.com">
+    <input type=hidden name="retURL" value="http://gleanings.org">
     <input type=hidden name="recordType" value="0128J0000004HT8">
 
     <!--  ----------------------------------------------------------------------  -->
@@ -23,6 +54,7 @@
     <!--  <input type="hidden" name="debugEmail" value="miles@cloudalt.com">      -->
     <!--  ----------------------------------------------------------------------  -->
 
+    <section class="form-grid">
     <label for="first_name">First Name</label><input  id="first_name" maxlength="40" name="first_name" size="20" type="text" /><br>
 
     <label for="last_name">Last Name</label><input  id="last_name" maxlength="80" name="last_name" size="20" type="text" /><br>
@@ -43,29 +75,50 @@
 
     <label for="country">Country</label><input  id="country" maxlength="40" name="country" size="20" type="text" /><br>
 
-    Group Type:<select  id="00N8J000000NrmT" name="00N8J000000NrmT" title="Group Type"><option value="">--None--</option><option value="Individual">Individual</option>
-    <option value="Group">Group</option>
-</select><br>
+    </section>
 
-    Group Size:<input  id="00N8J000000Njlh" name="00N8J000000Njlh" size="20" type="text" /><br>
+    <section class="form-grid">
+        <label for="00N8J000000NrmT"> Group Type:</label>
+        <select  id="00N8J000000NrmT" name="00N8J000000NrmT" title="Group Type">
+            <option value="">--None--</option>
+            <option value="Individual">Individual</option>
+            <option value="Group">Group</option>
+        </select>
 
-    Visit Type:<select  id="00N8J000000Nrmd" name="00N8J000000Nrmd" title="Visit Type"><option value="">--None--</option><option value="Day Visit">Day Visit</option>
-    <option value="Week">Week</option>
-    <option value="Longer Term">Longer Term</option>
-</select><br>
+        <label for="00N8J000000Njlh">Group Size:</label>
+        <input  id="00N8J000000Njlh" name="00N8J000000Njlh" size="20" type="text" />
 
-    Arrival Preference 1:<span class="dateInput dateOnlyInput"><input  id="00N8J000000Njlr" name="00N8J000000Njlr" size="12" type="text" /></span><br>
+        <label for="00N8J000000Nrmd">Visit Type:</label>
+        <select  id="00N8J000000Nrmd" name="00N8J000000Nrmd" title="Visit Type">
+            <option value="">--None--</option>
+            <option value="Day Visit">Day Visit</option>
+            <option value="Week">Week</option>
+            <option value="Longer Term">Longer Term</option>
+        </select>
+    </section>
 
-    Arrival Preference 2:<span class="dateInput dateOnlyInput"><input  id="00N8J000000Njlw" name="00N8J000000Njlw" size="12" type="text" /></span><br>
+    <section class="form-grid">
+        <label for="00N8J000000Njlr">Arrival Preference 1:</label>
+        <span class="dateInput dateOnlyInput"><input  id="00N8J000000Njlr" name="00N8J000000Njlr" size="12" type="text" /></span>
 
-    Arrival Time:<span class="timeContainer"><input  id="00N8J000000Nrms" name="00N8J000000Nrms" placeholder="HH:MM" size="12" type="text" /></span><br>
 
-    Length of Stay (Weeks):<input  id="00N8J000000Njlm" name="00N8J000000Njlm" size="20" type="text" /><br>
+        <label for="00N8J000000Njlw">Arrival Preference 2:</label>
+        <span class="dateInput dateOnlyInput"><input  id="00N8J000000Njlw" name="00N8J000000Njlw" size="12" type="text" /></span><br>
 
-    Meals:<select  id="00N8J000000Nrmx" multiple="multiple" name="00N8J000000Nrmx" title="Meals"><option value="Breakfast">Breakfast</option>
-    <option value="Lunch">Lunch</option>
-    <option value="Dinner">Dinner</option>
-</select><br>
+        <label for="00N8J000000Nrms">Arrival Time:</label>
+        <span class="timeContainer">
+            <input  id="00N8J000000Nrms" name="00N8J000000Nrms" placeholder="HH:MM" size="12" type="text" />
+        </span>
+
+        <label for="00N8J000000Njlm">Length of Stay (Weeks):</label>
+        <input  id="00N8J000000Njlm" name="00N8J000000Njlm" size="20" type="text" />
+    </section>
+
+    <section class="form-grid">
+        Meals:<select  id="00N8J000000Nrmx" multiple="multiple" name="00N8J000000Nrmx" title="Meals"><option value="Breakfast">Breakfast</option>
+        <option value="Lunch">Lunch</option>
+        <option value="Dinner">Dinner</option>
+    </select>
 
     Accommodations:<select  id="00N8J000000Nrme" multiple="multiple" name="00N8J000000Nrme" title="Accommodations"><option value="Housing needed">Housing needed</option>
     <option value="Ground floor">Ground floor</option>
@@ -75,6 +128,9 @@
 </select><br>
 
     Number of RV Sites:<input  id="00N8J000000Nrn2" name="00N8J000000Nrn2" size="20" type="text" /><br>
+    </section>
+
+    <section>
 
     New Volunteer:<input  id="00N8J000000Nrn7" name="00N8J000000Nrn7" type="checkbox" value="1" /><br>
 
@@ -82,6 +138,10 @@
 
     Volunteer Comments:<textarea  id="00N8J000000Njm6" name="00N8J000000Njm6" rows="3" type="text" wrap="soft"></textarea><br>
 
+    </section>
     <input type="submit" name="submit">
 
 </form>
+
+</body>
+</html>
