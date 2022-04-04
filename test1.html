@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
     <style type="text/css">
         body {
             background: #eee;
-            max-width: 40rem;
+            max-width: 45rem;
             margin: auto;
             font-family: sans-serif;
             line-height: 150%;
             padding-top: 2rem;
             font-size: 1rem;
         }
-
+        
         section {
             padding: 1rem;
             border: 1px solid #888;
@@ -20,273 +21,316 @@
             margin: 1rem;
             background: #fff;
         }
-
+        
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 2fr;
             gap: 1rem;
         }
+        
+        .form-grid-button {
+            display: grid;
+            justify-content: center;
+        }
+        
         fieldset {
             border-width: 0;
         }
-        .form-grid > fieldset {
+        
+        .form-grid>fieldset {
             grid-column: 1 / span 2;
         }
-        .form-grid header, .form-grid h2 {
+        
+        .form-grid header,
+        .form-grid h2 {
             grid-column: 1 / span 2;
             color: green;
             font-size: 1.2rem;
             font-weight: normal;
         }
+        
         .form-grid h3 {
             grid-column: 1 / span 2;
             color: #888;
             font-size: 1.0rem;
             font-weight: normal;
         }
-
+        
         .form-grid label {
             color: #444;
             justify-self: end;
         }
+        
         .form-grid input {
             color: #444;
         }
-
+        
         .form-grid input[type="checkbox"] {
             justify-self: start;
         }
+        
         .form-grid aside {
             color: white;
             background: red;
-            grid-column:  1/ span 2;
+            grid-column: 1/ span 2;
             padding: 1rem;
             border-radius: 1rem;
         }
+        
+        .form-button {
+            background-color: green;
+            color: white;
+            border-radius: 5px;
+            width: 200px;
+            justify-content: center;
+        }
+        
         input.invalid {
             border: 1px solid red;
         }
+        
         .hide {
             display: none;
         }
     </style>
 </head>
+
 <body>
 
-<h1>Gleanings Booking</h1>
-<form action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
+    <h1>Gleanings Booking</h1>
+    <form action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" onclick="validateForm()">
 
-    <input type=hidden name="oid" value="00D8J0000008fh0">
-    <input type=hidden name="retURL" value="http://gleanings.org">
-    <input type=hidden name="recordType" value="0128J0000004HT8">
+        <input type=hidden name="oid" value="00D8J0000008fh0">
+        <input type=hidden name="retURL" value="http://gleanings.org">
+        <input type=hidden name="recordType" value="0128J0000004HT8">
+        <input type="hidden" id="lead_source" name="lead_source" value="booking_form">
+        <!--  ----------------------------------------------------------------------  -->
+        <!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
+        <!--  these lines if you wish to test in debug mode.                          -->
+        <input type="hidden" name="debug" value=1>
+        <input type="hidden" name="debugEmail" value="miles@gleanings.org">
+        <!--  ----------------------------------------------------------------------  -->
 
-    <!--  ----------------------------------------------------------------------  -->
-    <!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
-    <!--  these lines if you wish to test in debug mode.                          -->
-    <!--  <input type="hidden" name="debug" value=1>                              -->
-    <!--  <input type="hidden" name="debugEmail" value="miles@cloudalt.com">      -->
-    <!--  ----------------------------------------------------------------------  -->
+        <section class="form-grid">
+            <h2>Primary Contact Information</h2>
+            <label for="first_name">First Name</label>
+            <input id="first_name" maxlength="40" name="first_name" size="20" type="text" required />
 
-    <section class="form-grid">
-        <h2>Primary Contact Information</h2>
-        <label for="first_name">First Name</label>
-        <input id="first_name" maxlength="40" name="first_name" size="20" type="text" required/>
+            <label for="last_name">Last Name</label>
+            <input id="last_name" maxlength="80" name="last_name" size="20" type="text" required />
 
-        <label for="last_name">Last Name</label>
-        <input id="last_name" maxlength="80" name="last_name" size="20" type="text"/>
+            <label for="email">Email</label>
+            <input id="email" maxlength="80" name="email" size="20" type="text" required />
 
-        <label for="email">Email</label>
-        <input id="email" maxlength="80" name="email" size="20" type="text"/>
+            <label for="phone">Phone</label>
+            <input id="phone" maxlength="40" name="phone" size="20" type="text" required />
 
-        <label for="phone">Phone</label>
-        <input id="phone" maxlength="40" name="phone" size="20" type="text"/>
+            <label for="company">Organization / Group Name</label>
+            <input id="company" maxlength="40" name="company" size="20" type="text" />
 
-        <label for="company">Company</label>
-        <input id="company" maxlength="40" name="company" size="20" type="text"/>
+            <h3>Street Address</h3>
+            <label for="street">Street</label><textarea id="street" name="street"></textarea>
 
-        <h3>Street Address</h3>
-        <label for="street">Street</label><textarea id="street" name="street"></textarea>
+            <label for="city">City/Town</label><input id="city" maxlength="40" name="city" size="20" type="text" />
 
-        <label for="city">City/Town</label><input id="city" maxlength="40" name="city" size="20" type="text"/>
+            <label for="state">State/Province</label><input id="state" maxlength="20" name="state" size="20" type="text" />
 
-        <label for="state">State/Province</label><input id="state" maxlength="20" name="state" size="20"
-                                                        type="text"/>
+            <label for="zip">Zip/Postal Code</label><input id="zip" maxlength="20" name="zip" size="20" type="text" />
 
-        <label for="zip">Zip/Postal Code</label><input id="zip" maxlength="20" name="zip" size="20" type="text"/>
+            <label for="country">Country</label>
+            <input id="country" maxlength="40" name="country" size="20" type="text" />
 
-        <label for="country">Country</label>
-        <input id="country" maxlength="40" name="country" size="20" type="text"/>
+        </section>
 
-    </section>
+        <section class="form-grid">
+            <h2>Type of Reservation</h2>
+            <label for="00N8J000000NrmT"> Group Type:</label>
+            <select id="00N8J000000NrmT" name="00N8J000000NrmT" title="Group Type">
+                <option value="">--None--</option>
+                <option value="Individual">Individual (Single, Couple, or Family)</option>
+                <option value="Group">Group (Churches, Youth Groups, Schools, Homeschool Co-Ops, etc.)</option>
+            </select>
 
-    <section class="form-grid">
-        <h2>Type of Reservation</h2>
-        <label for="00N8J000000NrmT"> Group Type:</label>
-        <select id="00N8J000000NrmT" name="00N8J000000NrmT" title="Group Type">
+            <label for="00N8J000000Njlh">How many in your party?</label>
+            <input id="00N8J000000Njlh" name="00N8J000000Njlh" size="20" type="text" />
+
+            <label for="00N8J000000Nrmd">Length of Visit</label>
+            <select id="00N8J000000Nrmd" name="00N8J000000Nrmd" title="Visit Type" data-name="visit-type">
             <option value="">--None--</option>
-            <option value="Individual">Individual (Single, Couple, or Family)</option>
-            <option value="Group">Group (Churches, Youth Groups, Schools, Homeschool Co-Ops, etc.)</option>
-        </select>
-
-        <label for="00N8J000000Njlh">How many in your party?</label>
-        <input id="00N8J000000Njlh" name="00N8J000000Njlh" size="20" type="text"/>
-
-        <label for="00N8J000000Nrmd">Length of Visit</label>
-        <select id="00N8J000000Nrmd" name="00N8J000000Nrmd" title="Visit Type" data-name="visit-type">
-            <option value="invalid">--None--</option>
             <option value="Day Visit">Day Visit (Monday through Friday only)</option>
             <option value="Week">Week (Sunday arrival, Friday departure)</option>
             <option value="Longer Term">Longer Term (More than a week, 3 months maximum)</option>
-        </select>
-    </section>
+            </select>
+        </section>
 
-    <section class="form-grid">
-        <h2 class="day-type">Visit for a Day</h2>
-        <h2 class='week-type'>Week Stay (Sunday late afternoon arrival, Friday departure)</h2>
-        <h2 class="long-type ">Long Term Stays</h2>
+        <section class="form-grid week-type long-type day-type">
+            <h2 class="day-type">Visit for a Day</h2>
+            <h2 class='week-type'>Week Stay (Sunday late afternoon arrival, Friday departure)</h2>
+            <h2 class="long-type ">Long Term Stays</h2>
 
-        <fieldset class="day-type form-grid">
-            <label class="day-type" for="00N8J000000Nrms">Arrival Time:</label>
-            <span class="day-type timeContainer">
-                <input id="00N8J000000Nrms" name="00N8J000000Nrms" placeholder="HH:MM" size="12" type="text"/>
+            <h3 class="week-type long-type">Select your preferred arrival dates</h3>
+            <label class="week-type long-type" for="00N8J000000Njlr">Arrival Preference 1:</label>
+            <label class="day-type" for="00N8J000000Njlr">Arrival Date:</label>
+            <span class="dateInput dateOnlyInput week-type long-type day-type">
+                <input id="00N8J000000Njlr" name="00N8J000000Njlr" size="12" type="text" placeholder="mm/dd/yyyy" />
             </span>
-            <label class="day-type">Departure Time:</label>
-            <span class="day-type timeContainer">
-                <input placeholder="HH:MM" size="12" type="text"/>
+            <label for="00N8J000000Njlw" class="week-type long-type">Arrival Preference 2:</label>
+            <span class="week-type long-type dateInput dateOnlyInput">
+                    <input id="00N8J000000Njlw" name="00N8J000000Njlw" size="12" type="text" placeholder="mm/dd/yyyy" />
             </span>
-            <aside class="day-type">missing form input for departure time</aside>
-        </fieldset>
 
-        <fieldset class="day-type form-grid">
-            <h3>Will you be joining us for meals? <i>Suggested donation is $5/meal)</i></h3>
-            <label>Breakfast (7:00 AM)</label>
-            <input type="checkbox"  name="00N8J000000Nrmx" value="Breakfast"/>
-            <label>Lunch (12:00 PM)</label>
-            <input type="checkbox"  name="00N8J000000Nrmx" value="Lunch">
-            <label>Dinner (5:30 PM)</label>
-            <input type="checkbox"  name="00N8J000000Nrmx"  value="Dinner">
-        </fieldset>
+            <label class="long-type" for="00N8J000000Njlm">Length of Stay (Weeks):</label>
+            <input class="long-type" id="00N8J000000Njlm" name="00N8J000000Njlm" size="20" type="text" />
 
+            <fieldset class="day-type form-grid">
+                <label class="day-type" for="00N8J000000Nrms">Arrival Time:</label>
+                <span class="day-type timeContainer">
+                <select id="00N8J000000Nrms" name="00N8J000000Nrms" title="Arrival Time"/>
+                    <option value="">--None--</option>
+                    <option value="Morning">Morning</option>
+                    <option value="Afternoon">Afternoon</option>
+                    <option value="Evening">Evening</option>
+                </select>
 
-        <label class="long-type" for="00N8J000000Nrn7">Are you new to Gleanings for the Hungry?</label>
-        <input class="long-type" id="00N8J000000Nrn7" name="00N8J000000Nrn7" type="checkbox" value="1"/>
-        <label class="long-type" for="00N8J000000NrnC">Have you completed the Mission Builder's application? (long term volunteers require additional screening)</label>
-        <input class="long-type" id="00N8J000000NrnC" name="00N8J000000NrnC" type="checkbox" value="1"/>
+            </span>
+            </fieldset>
 
-
-        <h3 class="week-type long-type">select your preferred arrival dates</h3>
-        <label class="week-type long-type" for="00N8J000000Njlr">Arrival Preference 1:</label>
-        <span class="dateInput dateOnlyInput week-type long-type"><input id="00N8J000000Njlr" name="00N8J000000Njlr" size="12" type="text"/></span>
-        <label for="00N8J000000Njlw" class="week-type long-type">Arrival Preference 2:</label>
-        <span class="week-type long-type dateInput dateOnlyInput"><input id="00N8J000000Njlw" name="00N8J000000Njlw" size="12" type="text"/></span>
-
-        <label class="long-type" for="00N8J000000Njlm">Length of Stay (Weeks):</label>
-        <input class="long-type" id="00N8J000000Njlm" name="00N8J000000Njlm" size="20" type="text"/>
+            <fieldset class="day-type form-grid">
+                <h3>Will you be joining us for meals? <i>Suggested donation is $5/meal)</i></h3>
+                <label>Breakfast (7:00 AM)</label>
+                <input type="checkbox" name="00N8J000000Nrmx" value="Breakfast" />
+                <label>Lunch (12:00 PM)</label>
+                <input type="checkbox" name="00N8J000000Nrmx" value="Lunch">
+                <label>Dinner (5:30 PM)</label>
+                <input type="checkbox" name="00N8J000000Nrmx" value="Dinner">
+            </fieldset>
 
 
-        <fieldset class="form-grid week-type long-type" title="Accommodations">
-            <h3 for="00N8J000000Nrme">What accommodations do you require?</h3>
-            <label>Housing needed</label>
-            <input type="checkbox" name="00N8J000000Nrme" value="Housing needed">
-            <label>Ground floor</label>
-            <input type="checkbox" name="00N8J000000Nrme" value="Ground floor">
-            <label>Accessible</label>
-            <input type="checkbox" name="00N8J000000Nrme" value="Accessible">
-            <label>RV site</label>
-            <input type="checkbox" name="00N8J000000Nrme" value="RV site">
-            <label>50 amp service</label>
-            <input type="checkbox" name="00N8J000000Nrme" value="50 amp service">
-        </fieldset>
+            <label class="long-type" for="00N8J000000Nrn7">Are you new to Gleanings for the Hungry?</label>
+            <input class="long-type" id="00N8J000000Nrn7" name="00N8J000000Nrn7" type="checkbox" value="1" />
+            <label class="long-type" for="00N8J000000NrnC">Have you completed the Mission Builder's application? (long term volunteers require additional screening)</label>
+            <input class="long-type" id="00N8J000000NrnC" name="00N8J000000NrnC" type="checkbox" value="1" />
 
-        <aside class="week-type long-type">should both week and long visits ask about number of RV sites?</aside>
-        <label class="week-type long-type" for="00N8J000000Nrn2">Number of RV Sites:</label>
-        <input class="week-type long-type" id="00N8J000000Nrn2" name="00N8J000000Nrn2" size="20" type="text"/>
+            <fieldset class="form-grid week-type long-type" title="Accommodations">
+                <h3 for="00N8J000000Nrme">What accommodations do you require?</h3>
+                <label>Housing needed</label>
+                <input type="checkbox" name="00N8J000000Nrme" value="Housing needed">
+                <label>Ground floor</label>
+                <input type="checkbox" name="00N8J000000Nrme" value="Ground floor">
+                <label>Accessible</label>
+                <input type="checkbox" name="00N8J000000Nrme" value="Accessible">
+                <label>RV site</label>
+                <input type="checkbox" name="00N8J000000Nrme" value="RV site">
+                <label>50 amp service</label>
+                <input type="checkbox" name="00N8J000000Nrme" value="50 amp service">
+            </fieldset>
 
-    </section>
+            <label class="week-type long-type" for="00N8J000000Nrn2">Number of RV Sites:</label>
+            <input class="week-type long-type" id="00N8J000000Nrn2" name="00N8J000000Nrn2" size="20" type="text" />
 
-    <section class="form-grid">
-        <h2>Comments</h2>
-        <label for="00N8J000000Njm6">Notes: Anything else we need to know? (food allergies, special diet, youth age ranges, etc)</label>
-        <textarea id="00N8J000000Njm6" name="00N8J000000Njm6" rows="3" type="text"
-                                     wrap="soft"></textarea>
+        </section>
 
-    </section>
-    <section class="form-grid">
-        <aside>make real validation</aside>
-    <input type="button" value="validate" id="validate"/>
-    <input type="submit" name="submit" id="submit" disabled>
-    </section>
+        <section class="form-grid">
+            <h2>Comments</h2>
+            <label for="00N8J000000Njm6">Notes: Anything else we need to know? (food allergies, special diet, youth age ranges, etc)</label>
+            <textarea id="00N8J000000Njm6" name="00N8J000000Njm6" rows="3" type="text" wrap="soft"></textarea>
+        </section>
+        <section class="form-grid-button">
+            <!-- <aside>make real validation</aside> -->
+            <!-- <input type="button" value="validate" id="validate" /> -->
+            <input class="form-button" type="submit" name="submit" id="submit" />
+        </section>
 
-</form>
+    </form>
 
-<script>
-    const $ = (sel) => document.querySelector(sel)
-    const $$ = (sel) => document.querySelectorAll(sel)
-    const on = (el, type, cb) => el.addEventListener(type,cb)
+    <script>
+        const $ = (sel) => document.querySelector(sel)
+        const $$ = (sel) => document.querySelectorAll(sel)
+        const on = (el, type, cb) => el.addEventListener(type, cb)
 
-    function is_invalid(input) {
-        console.log('checking',input.value)
-        if(input.value === null) return true
-        return false
-    }
-    function do_setup() {
-        console.log("doing the setup")
-        on($("#validate"),'click',() => {
-            console.log("clicked")
+        function is_invalid(input) {
+            console.log('checking', input.value)
+            if (input.value == "") {
+                console.log(input.name + " is required");
+                return true
+            }
+            return false
+        }
+
+        function validateForm() {
             let valid = true
             $$("input").forEach(inp => {
-                if(inp.required && is_invalid(inp)) {
+                if (inp.required && is_invalid(inp)) {
                     inp.classList.add('invalid')
-                    console.log('not valid')
                     valid = false
                 }
             })
-            if(valid) {
-                $("#submit").disabled = false
-            }
-        })
+            return valid;
+        }
 
-        let visit_type = 'invalid'
-        const DAY_VISIT = 'Day Visit'
-        const WEEK_VISIT = 'Week'
-        const LONG_VISIT = 'Longer Term'
-        //hide the day
-        function hide(name) {
-            $$(`.${name}-type`).forEach(el => el.classList.add('hide'))
-        }
-        function show(name) {
-            $$(`.${name}-type`).forEach(el => el.classList.remove('hide'))
-        }
-        function update_visible() {
-            if(visit_type === 'invalid') {
-                hide('day')
-                hide('week')
-                hide('long')
+        function do_setup() {
+            console.log("doing the setup")
+                /*****
+                on($("#validate"), 'click', () => {
+                    console.log("clicked")
+                    let valid = true
+                    $$("input").forEach(inp => {
+                        if (inp.required && is_invalid(inp)) {
+                            inp.classList.add('invalid')
+                            console.log('not valid')
+                            valid = false
+                        }
+                    })
+                    if (valid) {
+                        $("#submit").disabled = false
+                    }
+                })
+                *****/
+
+            let visit_type = 'invalid'
+            const DAY_VISIT = 'Day Visit'
+            const WEEK_VISIT = 'Week'
+            const LONG_VISIT = 'Longer Term'
+                //hide the day
+            function hide(name) {
+                $$(`.${name}-type`).forEach(el => el.classList.add('hide'))
             }
-            if(visit_type === DAY_VISIT) {
-                hide('week')
-                hide('long')
-                show('day')
+
+            function show(name) {
+                $$(`.${name}-type`).forEach(el => el.classList.remove('hide'))
             }
-            if(visit_type === WEEK_VISIT) {
-                hide('day')
-                hide('long')
-                show('week')
+
+            function update_visible() {
+                if (visit_type === 'invalid') {
+                    hide('day')
+                    hide('week')
+                    hide('long')
+                }
+                if (visit_type === DAY_VISIT) {
+                    hide('week')
+                    hide('long')
+                    show('day')
+                }
+                if (visit_type === WEEK_VISIT) {
+                    hide('day')
+                    hide('long')
+                    show('week')
+                }
+                if (visit_type === LONG_VISIT) {
+                    hide('day')
+                    hide('week')
+                    show('long')
+                }
             }
-            if(visit_type === LONG_VISIT) {
-                hide('day')
-                hide('week')
-                show('long')
-            }
-        }
-        on($(`select[data-name='visit-type']`),'change',(e)=>{
-            visit_type = e.target.value
+            on($(`select[data-name='visit-type']`), 'change', (e) => {
+                visit_type = e.target.value
+                update_visible()
+            })
             update_visible()
-        })
-        update_visible()
-    }
-    window.addEventListener("load", do_setup)
-</script>
+        }
+        window.addEventListener("load", do_setup)
+    </script>
 
 </body>
+
 </html>
